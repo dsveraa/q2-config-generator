@@ -1,0 +1,43 @@
+:root {
+  --background-color: #e4e4e4;
+  --text-color: #292929;
+  --link-color: #fcb605;
+  --input-color: rgb(1, 144, 49);
+  --input-bg-color: black;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background-color: #242424;
+    --text-color: #d7d7d7;
+    --link-color: #fcb605;
+    --input-color: rgb(1, 144, 49);
+  }
+}
+
+body {
+  background-color: var(--background-color);
+  color: var(--text-color);
+
+}
+
+input {
+  color: var(--input-color);
+  background-color: var(--input-bg-color);
+  border-radius: 7px;
+  text-align: center;
+  max-width: 110px;
+}
+
+textarea {
+  color: var(--input-color);
+  background-color: var(--input-bg-color);
+  border-radius: 7px;
+  padding: 20px;
+  flex-grow: 1;
+}
+
+.basis-0 {
+  display: flex;
+  flex-basis: 0;
+}
