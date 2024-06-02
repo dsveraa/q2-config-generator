@@ -1,18 +1,19 @@
 :root {
   --background-color: #e4e4e4;
-  --text-color: #292929;
+  --text-color: #595959;
+  --link-color: #fcb605;
+  --input-color: rgb(1, 144, 49);
+  --input-bg-color: white;
+  --border-style:none;
+}
+
+[data-theme="dark"] {
+  --background-color: #242424;
+  --text-color: #d7d7d7;
   --link-color: #fcb605;
   --input-color: rgb(1, 144, 49);
   --input-bg-color: black;
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background-color: #242424;
-    --text-color: #d7d7d7;
-    --link-color: #fcb605;
-    --input-color: rgb(1, 144, 49);
-  }
+  --border-style: inset;
 }
 
 body {
@@ -27,6 +28,8 @@ input {
   border-radius: 7px;
   text-align: center;
   max-width: 110px;
+  border-style: var(--border-style);
+  
 }
 
 textarea {
@@ -35,6 +38,7 @@ textarea {
   border-radius: 7px;
   padding: 20px;
   flex-grow: 1;
+  border-style: var(--border-style);
 }
 
 .basis-0 {
