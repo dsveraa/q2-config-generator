@@ -10,6 +10,7 @@ const weapons = [
   [0, 'BFG10k', 'use bfg10k', 'ubfg', 'dbfg', 'dcel'],
   ['ctrl', 'Drop Weapon', '+dropweap'],
   ['alt', 'Drop Ammo', '+dropammo'],
+  ['space', 'Zoom', '+zoom'],
 ]
 
 function createInputFields() {
@@ -26,7 +27,7 @@ function createInputFields() {
     input.addEventListener('mouseenter', function () {
       if (!document.activeElement || document.activeElement !== input) {
         this.focus()
-        this.select() 
+        this.select()
       }
     })
 
@@ -70,6 +71,7 @@ function updateBinds() {
   const dropWeaponBind = []
   const dropAmmoBind = []
   const modeBind = []
+  const zoomBind = []
 
   for (let i = 0; i <= 8; i++) {
     for (let j = 0; j <= 4; j++) {
@@ -89,16 +91,24 @@ function updateBinds() {
       }
     }
   }
+  
+  for (let i = 0; i <= 11; i++) {
+    for (let j = 0; j <= 2; j++) {
+      if (i >= 11 && j === 0) {
+        zoomBind.push(`bind ${weapons[i][j]} "${weapons[i][j + 2]}"`)
+      }
+    }
+  }
 
   const empty = ''
   const plusDropWeap = 'alias +dropweap "'
   const minusDropWeap = 'alias -dropweap "'
   const plusDropAmmo = 'alias +dropammo "'
   const minusDropAmmo = 'alias -dropammo "'
-
-  function bindConstructor (startWith, data) {
+  
+  function bindConstructor(startWith, data) {
     let result = startWith
-    
+
     if (startWith !== '') {
       for (let i = 0; i < data.length; i++) {
         result += data[i]
@@ -108,13 +118,12 @@ function updateBinds() {
       }
       result += '"'
       return result
-    } 
-      for (let i = 0; i < data.length; i++) {
-        result += `${data[i]}\n`
-      }
-      return result
-    
     }
+    for (let i = 0; i < data.length; i++) {
+      result += `${data[i]}\n`
+    }
+    return result
+  }
 
   const useWeap = bindConstructor(empty, weaponBind)
   const dropW_On = bindConstructor(plusDropWeap, dropWeaponBind)
@@ -122,8 +131,53 @@ function updateBinds() {
   const dropA_On = bindConstructor(plusDropAmmo, dropAmmoBind)
   const dropA_Off = bindConstructor(minusDropAmmo, useWeaponBind)
   const mode = bindConstructor(empty, modeBind)
+  const zoom = bindConstructor(empty, zoomBind)
 
-  const result = `//Copia y pega esta shit al final del autoexec.cfg\n\n${useWeap}\n${dropW_On}\n${dropW_Off}\n\n${dropA_On}\n${dropA_Off}\n\n${mode}`
+  const result = `//Copia y pega esta shit al final del autoexec.cfg
+${useWeap}
+${dropW_On}
+${dropW_Off}
+
+${dropA_On}
+${dropA_Off}
+
+${mode}
+${zoom}
+//drop weapon alias
+alias dsg "drop Shotgun;drop shells"
+alias dssg "drop Super Shotgun;drop shells"
+alias dmg "drop Machinegun;drop bullets"
+alias dcg "drop Chaingun;drop bullets"
+alias dgl "drop Grenade Launcher;drop grenades"
+alias drl "drop Rocket Launcher;drop rockets"
+alias dhb "drop Hyperblaster;drop cells"
+alias drg "drop Railgun;drop slugs"
+alias dbfg "drop BFG10K:drop cells"
+
+//drop ammo alias
+alias dshe "drop shells"
+alias dbul "drop bullets"
+alias dgre "drop grenades"
+alias droc "drop rockets"
+alias dcel "drop cells"
+alias dslu "drop slugs"
+
+//use weapon alias
+alias usg "use shotgun"
+alias ussg "use super shotgun"
+alias umg "use machinegun"
+alias ucg "use chaingun"
+alias ugl "use grenade launcher"
+alias url "use rocket launcher"
+alias uhb "use hyperblaster"
+alias ubfg "use bfg10k"
+alias urg "use railgun"
+alias ubs "use blaster"
+
+//zoom
+alias +zoom "fov 60; sensitivity 0.5"
+alias -zoom "fov 120; sensitivity 1.5"
+`
 
   return result
 }
