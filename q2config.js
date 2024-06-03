@@ -177,6 +177,13 @@ alias ubs "use blaster"
 //zoom
 alias +zoom "fov 60; sensitivity 0.5"
 alias -zoom "fov 120; sensitivity 1.5"
+
+//crosshair
+ch_scale "2"
+crosshair "2"
+ch_red "1"
+ch_green "0"
+ch_blue "1"
 `
 
   return result
